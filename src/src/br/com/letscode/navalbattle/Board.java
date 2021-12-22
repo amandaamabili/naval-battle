@@ -7,8 +7,6 @@ public class Board {
 
     public static Scanner input = new Scanner(System.in);
     public static char[] coordinate = new char[2];
-    public static String coordLetter;
-    public static int coordNumber;
 
 
 
@@ -90,11 +88,14 @@ public class Board {
                     /*
                     Aqui inserimos um "N" nas coordenadas passadas acima.
                     O que estamos fazendo é o seguinte:
+                    Temos o array de char que recebeu a entrada: [char B, char 2]
                     Chamamos o playerBoard[][] e
-                    dentro do primeiro nível, convertemos o char para String e buscamos seu índice
-                    usando o array auxiliar de letras lá encima. Esse índice é passado no primeiro parâmetro.
-                    No segundo nível, convertemos o char numérico para Integer e ele se torna o segundo parâmetro,
-                    onde o "N" será inserido naquela linha
+                    dentro do primeiro nível, convertemos o primeiro char da entrada para String: [String "B", char 2]
+                    buscamos seu índice usando o array auxiliar de letras lá encima: [int 1, char 2]
+                    Esse índice é passado no primeiro parâmetro: playerboard[1][].
+                    No segundo nível, convertemos o char numérico para Integer: [int 1, int 2]
+                    e ele se torna o segundo parâmetro: playerboard[1][2].
+                    O "N" será inserido naquela linha [1] e naquele espaço [2];
                      */
 
                 playerBoard
