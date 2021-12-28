@@ -125,4 +125,69 @@ public class Board {
 
         }
 
+
+        public static void playerShot() {
+
+        }
+
+
+//        public static void placeEnemyShips(){
+//            enemyBoard[randomCoordinatesGenerator()][randomCoordinatesGenerator()] = "N";
+//        }
+
+//---------------------------------------------------------------------------------------------------------------------
+//        Função onde a IA espalha seus 10 submarinos aleatoriamente no tabuleiro dela
+        public static void enemyPlacingShipsOnBoard() {
+
+//              reutilizamos o contador da função do jogador, resetamos para 1 para começar o loop
+            submarineNumber = 1;
+            enemyCheckBoardAndPlaceShip();
+
+        }
+
+//        método interno de enemyPlacingShipsOnBoard();
+//        Alternativa: Zerar o contador no Main e mesclar esses dois métodos aqui.
+    private static void enemyCheckBoardAndPlaceShip() {
+        while (submarineNumber <= 10) {
+
+//                gerados 2 numeros aleatórios que serão testados se já foram usados (verificando se já tem um "N" lá)
+            coordinateRow = randomCoordinatesGenerator();
+            coordinateTile = randomCoordinatesGenerator();
+
+            if (Objects.equals(enemyBoard[coordinateRow][coordinateTile], "N")) {
+                enemyCheckBoardAndPlaceShip();
+            } else {
+                enemyBoard[coordinateRow][coordinateTile] = "N";
+                submarineNumber++;
+            }
+        }
+    }
+
+//--------------------------------------------------------------------------------------------------------------------
+        public static void enemyMoves(){
+            if(playerBoard[randomCoordinatesGenerator()][randomCoordinatesGenerator()] == "N") {
+                playerBoard[randomCoordinatesGenerator()][randomCoordinatesGenerator()] = "*";
+
+            } else {
+                enemyBoard[randomCoordinatesGenerator()][randomCoordinatesGenerator()] = "-";
+            }
+        }
+
+//--------------------------------------------------------------------------------------------------------------------
+    public static void drawEnemyBoard() {
+        System.out.println(
+                "---------------------------------------------\n"
+                        +"                  JOGADOR                 \n"+
+                        "---------------------------------------------\n"+
+                        "|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n"+
+                        "---------------------------------------------"
+        );
+        for (int row = 0; row < enemyBoard.length; row++) {
+            System.out.printf("| %s ", columnLetter[row]);
+            for (int tile = 0; tile < enemyBoard[row].length; tile++) {
+                System.out.printf("| %s ", enemyBoard[row][tile]);
+            }
+            System.out.printf("|\n---------------------------------------------\n");
+        }
+    }
 }

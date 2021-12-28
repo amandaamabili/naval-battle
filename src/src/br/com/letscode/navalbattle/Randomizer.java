@@ -13,7 +13,4 @@ public class Randomizer {
     public static int randomCoordinatesGenerator() {
         return random.nextInt(10);
     }
-
-
-
 }
