@@ -1,22 +1,14 @@
 package src.br.com.letscode.navalbattle;
 
-import static src.br.com.letscode.navalbattle.Board.*;
-import static src.br.com.letscode.navalbattle.Randomizer.*;
-import static src.br.com.letscode.navalbattle.Main.*;
+import java.util.Scanner;
 
 public class Player {
 
+    protected int points = 0;
+    protected int submarineCounter = 0; //TODO: ainda não implementado, substituir o submarineNumber estático abaixo por este.
+    protected static Scanner input = new Scanner(System.in);
+    protected static int  coordinateRow, coordinateTile;
+    protected static int submarineNumber = 1;
 
-//
-
-//    Função para fazer uma jogada - uma tentativa de acertar o submarino do tabuleiro inimigo
-    public static void boardTurnPlay() {
-
-
-    }
-
-    public static void randomBoardTurnPlay() {
-
-    }
 
 }
