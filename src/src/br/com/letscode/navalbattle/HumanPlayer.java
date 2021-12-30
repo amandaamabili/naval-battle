@@ -15,67 +15,50 @@ public class HumanPlayer extends Player{
 
 
 //--------------------------------------------------------------------------------------------------------------------
-//    Função para o jogador inserir manualmente suas peças no tabuleiro
-//    public void playerInsertShipsOnBoard() {
 //
-//               /*
-//                    Armazenamos a coordenada inserida
-//                    (que deve vir em formato LetraNúmero, exemplos: B2, C4)
-//                    em um array de chars;
-//                    O que estamos fazendo é o seguinte:
-//                    Temos o array de char que recebeu a entrada: [char B, char 2] por exemplo.
-//                    Vamos armazenar o primeiro char em coordinateRow e o segundo em coordinateTile,
-//                    Linha e Casinha respectivamente.
-//                    Convertemos o primeiro char da entrada para String: [String "B", char 2]
-//                    buscamos seu índice usando o array auxiliar de letras lá encima: [int 1, char 2]
-//                    Esse índice será passado no primeiro parâmetro: playerboard[1][].
-//                    No segundo nível, convertemos o char numérico para Integer: [int 1, int 2]
-//                    e ele se torna o segundo parâmetro: playerboard[1][2].
-//                    Fazemos um teste antes para ver se já há um "N" naquele espaço.
-//                    Se houver, usamos o princípio da RECURSÃO e chamamos a função dentro dela mesmo de novo.
-//                    Se não houver, preenchemos o Tile com o "N" e incrementamos o contador para o próximo Submarino.
-//                 */
-//
-//        while (submarineNumber <= 10) {
-//            System.out.printf("Selecione a localização do Submarino %d %n", submarineNumber);
-//            coordinate = input.next().toCharArray();
+
+
+//        protected void randomShipsForPlayer() {
 //
 //
-//            if (coordinate.length != 2) {
-//                System.err.println("Você escreveu errado. Escreve direito. Letra e número.");
-//                playerInsertShipsOnBoard();
-//                break;
-//            }
-//
-//            coordinateRow = Arrays.asList(columnLetter).indexOf(Character.toString(coordinate[0]).toUpperCase());
-//            coordinateTile = Character.getNumericValue(coordinate[1]);
-//
-//            if (playerBoard[coordinateRow][coordinateTile] == "N") {
-//                System.err.println("Já existe um Submarino nesta casa. Tente novamente em outro lugar.");
-//                playerInsertShipsOnBoard();
-//                break;
-//            } else {
-//                playerBoard[coordinateRow][coordinateTile] = "N";
-//                submarineNumber++;
-//            }
 //        }
+
+
+
+        private boolean isValidMove() {
+            if (coordinate.length != 2)  {
+                System.err.println("Você escreveu errado. Escreve direito. Letra e número.");
+                return false;
+            }
+
+            coordinateRow = Arrays.asList(columnLetter).indexOf((coordinate[0]).toUpperCase());
+
+            if(coordinateRow == -1) {
+                System.err.println("Digite uma letra válida.");
+                return false;
+            }
+            try {
+                coordinateTile = Integer.parseInt(coordinate[1]);
+            }  catch(NumberFormatException e) {
+                System.err.println("Digite algo valido");
+                return false;
+            }
+            return true;
+    }
 
         protected void playerInsertShipsOnBoard() {
 
             // TODO: Substituir o uso dessa variável estática submarineNumber pela submarineCounter de cada jogador;
             while (submarineNumber <= 10) {
                 System.out.printf("Selecione a localização do Submarino %d %n", submarineNumber);
-                coordinate = input.next().split("");
 
+                boolean isSubmarineValid = false;
 
-            //TODO: Checar aqui se o input do jogador é diferente de LetraNúmero, antes de entrar nas linhas abaixo.
-
-
-                if (coordinate.length != 2)  {
-                    System.err.println("Você escreveu errado. Escreve direito. Letra e número.");
-                    playerInsertShipsOnBoard();
-                    break;
+                while(!isSubmarineValid) {
+                    coordinate = input.next().split("");
+                    isSubmarineValid = isValidMove();
                 }
+
 
                 coordinateRow = Arrays.asList(columnLetter).indexOf((coordinate[0]).toUpperCase());
                 coordinateTile = Integer.parseInt(coordinate[1]);
@@ -91,19 +74,41 @@ public class HumanPlayer extends Player{
             }
 
         }
+        /*
+            O que fizemos acima foi o seguinte:
+                Armazenamos a coordenada inserida
+                (que deve vir em formato LetraNúmero, exemplos: B2, C4)
+                em um array de String chamado "coordinate";
+                Temos o array de String que recebeu a entrada: [String "B", String 2] por exemplo.
+                Vamos armazenar o primeiro String em coordinateRow e o segundo em coordinateTile,
+                Linha e Casinha respectivamente.
+                Buscamos o índice do primeiro String usando o array auxiliar de letras lá encima: [int 1, char 2]
+                Esse índice será passado no primeiro parâmetro: playerboard[1][].
+                No segundo nível, convertemos o String numérico para Integer: [int 1, int 2]
+                e ele se torna o segundo parâmetro: playerboard[1][2].
+                Fazemos um teste antes para ver se já há um "N" naquele espaço.
+                Se houver, usamos o princípio da RECURSÃO e chamamos a função dentro dela mesmo de novo.
+                Se não houver, preenchemos o Tile com o "N" e incrementamos o contador para o próximo Submarino.
+
+            */
+
+
+
+
 //-------------------------------------------------------------------------------------------------------------
         protected void playerMoves() {
 
             System.out.println("Faça sua jogada. Digite uma coordenada!");
 
-            coordinate = input.next().split("");
+            boolean isPlayerMoveValid = false;
 
-            //TODO: Checar aqui se o input do jogador é diferente de LetraNúmero, antes de entrar nas linhas abaixo.
+            while(!isPlayerMoveValid) {
+                coordinate = input.next().split("");
+                isPlayerMoveValid = isValidMove();
+            }
 
-            coordinateRow = Arrays.asList(columnLetter).indexOf((coordinate[0]).toUpperCase());
-            coordinateTile = Integer.parseInt(coordinate[1]);
 
-                if(enemyBoard[coordinateRow][coordinateTile] == "N") {
+            if(enemyBoard[coordinateRow][coordinateTile] == "N") {
                 playerBoard[coordinateRow][coordinateTile] = "*";
                 enemyBoard[coordinateTile][coordinateRow] = "*";
                 this.points++;
@@ -115,6 +120,8 @@ public class HumanPlayer extends Player{
                 }
             }
         }
+
+
 }
 
 
