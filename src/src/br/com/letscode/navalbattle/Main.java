@@ -24,7 +24,8 @@ public class Main {
 
 //        TODO: Create option for player to randomize ships on board
 
-        humanPlayer.playerInsertShipsOnBoard();
+        humanPlayer.randomShipsForPlayer();
+//        humanPlayer.playerInsertShipsOnBoard();
 
         System.out.println("A IA agora vai espalhar as peça dela igual uma louca");
 

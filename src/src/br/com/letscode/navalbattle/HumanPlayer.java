@@ -1,8 +1,10 @@
 package src.br.com.letscode.navalbattle;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static src.br.com.letscode.navalbattle.Board.*;
+import static src.br.com.letscode.navalbattle.Randomizer.randomCoordinatesGenerator;
 
 public class HumanPlayer extends Player{
 
@@ -18,10 +20,37 @@ public class HumanPlayer extends Player{
 //
 
 
-//        protected void randomShipsForPlayer() {
-//
-//
-//        }
+        protected void randomShipsForPlayer() {
+            System.out.println("Você gostaria de colocar randomicamente os submarinos? 'Sim' ou 'Nao' ");
+
+            String answer = input.next();
+
+            //Logica para colocar a primeira letra de 'sim' ou 'nao' em maisculo;
+            String firstLet = answer.substring(0, 1);
+            String remLetAnswer = answer.substring(1);
+            String firstLetUppercase = firstLet.toUpperCase();
+            String finalAnswer = firstLetUppercase + remLetAnswer;
+
+
+            if(finalAnswer.equals("Sim")) {
+                while (submarineNumber <= 10) {
+
+//                gerados 2 numeros aleatórios que serão testados se já foram usados (verificando se já tem um "N" lá)
+                    coordinateRow = randomCoordinatesGenerator();
+                    coordinateTile = randomCoordinatesGenerator();
+
+                    if (Objects.equals(playerBoard[coordinateRow][coordinateTile], "N")) {
+                        randomShipsForPlayer();
+                    } else {
+                        playerBoard[coordinateRow][coordinateTile] = "N";
+                        submarineNumber++;
+                    }
+                }
+            } else {
+                playerInsertShipsOnBoard();
+            }
+
+        }
 
 
 
@@ -48,6 +77,9 @@ public class HumanPlayer extends Player{
 
         protected void playerInsertShipsOnBoard() {
 
+
+
+
             // TODO: Substituir o uso dessa variável estática submarineNumber pela submarineCounter de cada jogador;
             while (submarineNumber <= 10) {
                 System.out.printf("Selecione a localização do Submarino %d %n", submarineNumber);
@@ -58,7 +90,6 @@ public class HumanPlayer extends Player{
                     coordinate = input.next().split("");
                     isSubmarineValid = isValidMove();
                 }
-
 
                 coordinateRow = Arrays.asList(columnLetter).indexOf((coordinate[0]).toUpperCase());
                 coordinateTile = Integer.parseInt(coordinate[1]);
