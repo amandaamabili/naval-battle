@@ -5,7 +5,7 @@ import src.br.com.letscode.navalbattle.player.IA;
 import src.br.com.letscode.navalbattle.player.Player;
 
 import java.util.Scanner;
-
+//classe Board é o tabuleiro completo
 public class Board {
 
     Scanner scanner = new Scanner(System.in);

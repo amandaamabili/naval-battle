@@ -7,14 +7,19 @@ import src.br.com.letscode.navalbattle.grid.enums.Status;
 
 import java.util.Scanner;
 
+
+//classe human é herdada da classe jogador
 public class Human extends Player {
     Scanner scanner;
+//A classe Scanner tem como objetivo separar a entrada dos textos em blocos,
+// que são sequências de caracteres separados por delimitadores que por padrão correspondem aos espaços em branco, tabulações e mudança de linha.
 
     public Human(String name, Scanner scanner) {
         super(name, true);
         this.scanner = scanner;
     }
 
+    //o método que verifica se quer distribuir os números randomicamente
     public void distributeShipsRandomly() {
         System.out.println("Você gostaria de colocar randomicamente os submarinos? 'Sim' ou 'Nao' ");
         String answer = scanner.next();
@@ -32,6 +37,7 @@ public class Human extends Player {
         }
     }
 
+    // O método para distribuir a posição dos navios manualmente
     public void distributeShipsManually() {
         var coordinate = new String[2];
 
@@ -54,7 +60,7 @@ public class Human extends Player {
             this.grid.shipsAdded++;
         }
     }
-
+//O método para atirar na grade do inimigo
     public void shoot(Grid enemyBoard) {
         boolean isPlayerMoveValid = false;
 

@@ -4,8 +4,10 @@ import src.br.com.letscode.navalbattle.grid.Grid;
 
 import static src.br.com.letscode.navalbattle.utils.Randomizer.randomCoordinatesGenerator;
 
-public class IA extends Player {
+//classe IA é herdada da classe jogador
 
+public class IA extends Player {
+//distribui os navios randomicamente
     public IA() {
         super("IA", false);
         this.distributeShipsRandomly();

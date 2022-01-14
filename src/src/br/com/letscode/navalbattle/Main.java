@@ -13,8 +13,7 @@ public class Main {
             board.iaTurn();
 
             board.printPositions(board.p1);
-            board.printPositions(board.p2);
-
+//            board.printPositions(board.p2);
             board.score();
         }
     }
