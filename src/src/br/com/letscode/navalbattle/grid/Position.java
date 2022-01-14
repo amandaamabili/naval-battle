@@ -6,19 +6,19 @@ import src.br.com.letscode.navalbattle.grid.enums.Status;
 
 public class Position {
 
-    private final Column row;
-    private final Row column;
+    private final Column column;
+    private final Row row;
 
     private Status status;
-
-    public Position(Column r, Row c) {
+//
+    public Position(Column c, Row r) {
         this.row = r;
         this.column = c;
         this.status = Status.EMPTY;
     }
 
-    public Row getColumn() {
-        return column;
+    public Row getRow() {
+        return row;
     }
 
     public Status getStatus() {
@@ -37,7 +37,6 @@ public class Position {
         return this.status == Status.FILLED || this.status == Status.SHOOTED_WATER_WITH_SHIP
                 || this.status == Status.DESTROYED_WITH_SHIP;
     }
-
     public void updateAfterShoot(boolean hit) {
         this.status = this.status.getStatusAfterShoot(hit);
     }
